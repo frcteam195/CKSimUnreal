@@ -1,0 +1,3 @@
+[submodule "Plugins/CKSimPlugin/Source/ThirdParty/CKlibzmq"]
+	path = Plugins/CKSimPlugin/Source/ThirdParty/CKlibzmq
+	url = https://github.com/frcteam195/CKlibzmq.git
