@@ -1,3 +1,6 @@
 [submodule "Plugins/CKSimPlugin/Source/ThirdParty/CKlibzmq"]
 	path = Plugins/CKSimPlugin/Source/ThirdParty/CKlibzmq
 	url = https://github.com/frcteam195/CKlibzmq.git
+[submodule "Plugins/CKSimPlugin/Source/ThirdParty/CKprotobuf"]
+	path = Plugins/CKSimPlugin/Source/ThirdParty/CKprotobuf
+	url = https://github.com/frcteam195/CKprotobuf.git
