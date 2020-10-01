@@ -26,7 +26,6 @@ public class CKSimPlugin : ModuleRules
 			new string[]
 			{
 				"Core",
-				"CKSimPluginLibrary",
 				"CKlibzmq",
 				"Projects"
 				// ... add other public dependencies that you statically link with here ...
