@@ -50,7 +50,7 @@ void FCKSimPluginModule::StartupModule()
 	// Add on the relative location of the third party dll and load it
 	FString LibraryPath;
 #if PLATFORM_WINDOWS
-	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/CKlibzmq/bin/libzmq-v142-mt-4_3_2.dll"));
+	LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/CKlibzmq/bin/libzmq-v142-mt-4_3_3.dll"));
 #elif PLATFORM_MAC
     LibraryPath = FPaths::Combine(*BaseDir, TEXT("Source/ThirdParty/CKSimPluginLibrary/Mac/Release/libExampleLibrary.dylib"));
 #endif // PLATFORM_WINDOWS
