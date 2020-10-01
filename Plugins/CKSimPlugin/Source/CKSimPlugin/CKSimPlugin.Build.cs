@@ -10,14 +10,13 @@ public class CKSimPlugin : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				// ... add public include paths required here ...
 			}
 			);
 				
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				// ... add other private include paths required here ...
+				"..\\Source\\ThirdParty\\CKlibzmq\\include"
 			}
 			);
 			
@@ -27,7 +26,8 @@ public class CKSimPlugin : ModuleRules
 			{
 				"Core",
 				"CKlibzmq",
-				"Projects"
+				"Projects",
+				"CKprotobuf"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

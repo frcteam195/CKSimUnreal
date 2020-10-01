@@ -7,7 +7,7 @@
 
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
-#include "CKlibzmq/include/zmq.h"
+#include "zmq.h"
 
 #include "Containers/Ticker.h"
 
