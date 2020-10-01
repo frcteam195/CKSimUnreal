@@ -27,6 +27,8 @@ public class CKSimPlugin : ModuleRules
 				"Core",
 				"CKlibzmq",
 				"Projects",
+				"CoreUObject",
+				"Engine",	
 				"CKprotobuf"
 				// ... add other public dependencies that you statically link with here ...
 			}
