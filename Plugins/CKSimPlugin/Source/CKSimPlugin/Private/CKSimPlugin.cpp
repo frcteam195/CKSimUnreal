@@ -8,6 +8,7 @@
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
 #include "zmq.h"
+#include "zmqInterface.h"
 
 #include "Containers/Ticker.h"
 
@@ -18,25 +19,9 @@
 FTickerDelegate TickDelegate;
 FDelegateHandle TickDelegateHandle;
 
-static void* context;
-static void* robot_socket;
-static int rc;
-
 bool FCKSimPluginModule::Tick(float DeltaTime)
 {
-	static char buffer[8000];
-	int received_bytes = zmq_recv(robot_socket, buffer, 8000, ZMQ_NOBLOCK);
-
-	if (received_bytes >= 0)
-	{
-		static int temp = 0;
-		if (temp == 0)
-		{
-			FMessageDialog::Open(EAppMsgType::Ok, LOCTEXT("Message", "Got"));
-			temp = 1;
-		}
-		zmq_send(robot_socket, buffer, 8000, 0);
-	}
+	robosim::zmq_interface::step();
 	return true;
 }
 
@@ -59,21 +44,10 @@ void FCKSimPluginModule::StartupModule()
 
 	if (ExampleLibraryHandle)
 	{
-		// Call the test function in the third party library that opens a message box
-		context = zmq_ctx_new();
-		robot_socket = zmq_socket(context, ZMQ_REP);
-		rc = zmq_bind(robot_socket, "tcp://*:25557");
-
-		std::stringstream temp;
-		temp << "Whatsit: " << rc;
-
-		FText SomeText = FText::FromString(temp.str().c_str());
-
-		FMessageDialog::Open(EAppMsgType::Ok, SomeText);
-
 		TickDelegate = FTickerDelegate::CreateRaw(this, &FCKSimPluginModule::Tick);
 		TickDelegateHandle = FTicker::GetCoreTicker().AddTicker(TickDelegate);
 
+		robosim::zmq_interface::init();
 	}
 	else
 	{
@@ -85,6 +59,8 @@ void FCKSimPluginModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
+
+	robosim::zmq_interface::destroy();
 
 	// Free the dll handle
 	FTicker::GetCoreTicker().RemoveTicker(TickDelegateHandle);
