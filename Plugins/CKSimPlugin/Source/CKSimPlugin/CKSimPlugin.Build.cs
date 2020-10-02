@@ -16,7 +16,9 @@ public class CKSimPlugin : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				"..\\Source\\ThirdParty\\CKlibzmq\\include"
+				"..\\Source\\ThirdParty\\CKlibzmq\\include",
+				"..\\Source\\ThirdParty\\CKSimProtoSpec\\CKSimProtoSpecLib",
+				"..\\Source\\ThirdParty\\CKprotobuf\\src"
 			}
 			);
 			

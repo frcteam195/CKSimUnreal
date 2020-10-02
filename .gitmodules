@@ -4,3 +4,6 @@
 [submodule "Plugins/CKSimPlugin/Source/ThirdParty/CKprotobuf"]
 	path = Plugins/CKSimPlugin/Source/ThirdParty/CKprotobuf
 	url = https://github.com/frcteam195/CKprotobuf.git
+[submodule "Plugins/CKSimPlugin/Source/ThirdParty/CKSimProtoSpec/CKSimProtoSpecLib"]
+	path = Plugins/CKSimPlugin/Source/ThirdParty/CKSimProtoSpec/CKSimProtoSpecLib
+	url = https://github.com/frcteam195/CKSimProtoSpecLib.git
