@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "zmqInterface.h"
-
+#include "ControlMessage.pb.h"
 #include "zmq.h"
 
 static void* robosim_zmq_context = NULL;

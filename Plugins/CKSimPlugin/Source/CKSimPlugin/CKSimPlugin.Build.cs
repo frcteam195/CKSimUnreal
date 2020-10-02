@@ -31,7 +31,8 @@ public class CKSimPlugin : ModuleRules
 				"Projects",
 				"CoreUObject",
 				"Engine",	
-				"CKprotobuf"
+				"CKprotobuf",
+				"CKSimProtoSpec"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
