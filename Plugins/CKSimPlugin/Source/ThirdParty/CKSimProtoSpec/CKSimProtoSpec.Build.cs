@@ -12,7 +12,7 @@ public class CKSimProtoSpec : ModuleRules
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			// Add the import library
-			PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "CKSimProtoSpecLib", "Release", "CKSimProtoSpecLib.lib"));
+			PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "CKSimProtoSpecLib", "x64", "Release", "CKSimProtoSpecLib.lib"));
 
         }
 	}

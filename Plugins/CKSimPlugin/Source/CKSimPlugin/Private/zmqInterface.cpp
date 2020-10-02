@@ -1,8 +1,13 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "zmqInterface.h"
-#include "ControlMessage.pb.h"
 #include "zmq.h"
+
+#include "ControlMessage.pb.h"
+#include "StatusMessage.pb.h"
+
+static ControlMessage robosimControl;
+static StatusMessage robosimStatus;
 
 static void* robosim_zmq_context = NULL;
 static void* publisher_socket = NULL;
