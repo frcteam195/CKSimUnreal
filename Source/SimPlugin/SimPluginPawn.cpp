@@ -13,6 +13,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 
+#include "RoboSim.h"
+
 const FName ASimPluginPawn::MoveForwardBinding("MoveForward");
 const FName ASimPluginPawn::MoveRightBinding("MoveRight");
 const FName ASimPluginPawn::FireForwardBinding("FireForward");
@@ -65,9 +67,10 @@ void ASimPluginPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInpu
 
 void ASimPluginPawn::Tick(float DeltaSeconds)
 {
+	static UrawRoboSim temp;
 	// Find movement direction
-	const float ForwardValue = GetInputAxisValue(MoveForwardBinding);
-	const float RightValue = GetInputAxisValue(MoveRightBinding);
+	const float ForwardValue = temp.Get_Motor(0);
+	const float RightValue = temp.Get_Motor(1);
 
 	// Clamp max size so that (X=1, Y=1) doesn't cause faster movement in diagonal directions
 	const FVector MoveDirection = FVector(ForwardValue, RightValue, 0.f).GetClampedToMaxSize(1.0f);
@@ -91,12 +94,20 @@ void ASimPluginPawn::Tick(float DeltaSeconds)
 	}
 	
 	// Create fire direction vector
-	const float FireForwardValue = GetInputAxisValue(FireForwardBinding);
-	const float FireRightValue = GetInputAxisValue(FireRightBinding);
+	const float FireForwardValue = temp.Get_Motor(2);
+	const float FireRightValue = temp.Get_Motor(3);
 	const FVector FireDirection = FVector(FireForwardValue, FireRightValue, 0.f);
 
-	// Try and fire a shot
-	FireShot(FireDirection);
+	if (FireForwardValue > 0.5 || FireRightValue > 0.5)
+	{
+		// Try and fire a shot
+		FireShot(FireDirection);
+	}
+ 
+	temp.Set_Accelerometer(0, temp.Get_Motor(0));
+	temp.Set_Advanced(0, temp.Get_Motor(0));
+	temp.Set_Encoder(0, temp.Get_Motor(0));
+	temp.Set_Gyroscope(0, temp.Get_Motor(0));
 }
 
 void ASimPluginPawn::FireShot(FVector FireDirection)
