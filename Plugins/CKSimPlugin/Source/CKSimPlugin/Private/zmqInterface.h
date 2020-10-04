@@ -8,8 +8,11 @@ namespace robosim
 	{
 		void init();
 		void step();
-		void * get_status();
-		void set_control(void * input);
+		float get_motor(int motor);
+		void set_encoder(int encoder, float value);
+		void set_accelerometer(int accelerometer, float value);
+		void set_gyroscope(int gyroscope, float value);
+		void set_advanced(int advanced, float value);
 		void destroy();
 	}
 }

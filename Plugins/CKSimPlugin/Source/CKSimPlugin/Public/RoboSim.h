@@ -15,6 +15,18 @@ class URoboSim : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 		
 	UFUNCTION(BlueprintCallable, Category = "Robosim")
-	static bool Todd_Test();
-	
+	static float Get_Motor(int motor_id);
+
+	UFUNCTION(BlueprintCallable, Category = "Robosim")
+	static void Set_Encoder(int encoder_id, float value);
+
+	UFUNCTION(BlueprintCallable, Category = "Robosim")
+	static void Set_Accelerometer(int accelerometer_id, float value);
+
+	UFUNCTION(BlueprintCallable, Category = "Robosim")
+	static void Set_Gyroscope(int gyroscope_id, float value);
+
+	UFUNCTION(BlueprintCallable, Category = "Robosim")
+	static void Set_Advanced(int advanced_id, float value);
+
 };
