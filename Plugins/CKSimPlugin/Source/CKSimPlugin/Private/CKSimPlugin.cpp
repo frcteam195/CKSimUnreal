@@ -41,6 +41,7 @@ void FCKSimPluginModule::StartupModule()
 #endif // PLATFORM_WINDOWS
 
 	ExampleLibraryHandle = !LibraryPath.IsEmpty() ? FPlatformProcess::GetDllHandle(*LibraryPath) : nullptr;
+	UE_LOG(LogTemp, Warning, TEXT("Starting up CK plugin"));
 
 	if (ExampleLibraryHandle)
 	{
@@ -48,6 +49,7 @@ void FCKSimPluginModule::StartupModule()
 		TickDelegateHandle = FTicker::GetCoreTicker().AddTicker(TickDelegate);
 
 		robosim::zmq_interface::init();
+		UE_LOG(LogTemp, Warning, TEXT("init complete"));
 	}
 	else
 	{
