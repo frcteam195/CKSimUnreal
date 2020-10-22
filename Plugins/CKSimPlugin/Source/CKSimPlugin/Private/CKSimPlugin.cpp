@@ -3,18 +3,19 @@
 #include "CKSimPlugin.h"
 #include "Core.h"
 
-#include "Windows/MinWindows.h"
-
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IPluginManager.h"
-#include "zmq.h"
-#include "zmqInterface.h"
-
 #include "Containers/Ticker.h"
 
 #include <sstream>
 
 #define LOCTEXT_NAMESPACE "FCKSimPluginModule"
+
+#include "Windows/AllowWindowsPlatformAtomics.h"
+#include "Windows/MinWindows.h"
+#include "zmq.h"
+#include "zmqInterface.h"
+#include "Windows/HideWindowsPlatformAtomics.h"
 
 FTickerDelegate TickDelegate;
 FDelegateHandle TickDelegateHandle;

@@ -17,8 +17,11 @@
 	"Modules": [
 		{
 			"Name": "CKSimPlugin",
-			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"Type": "Developer",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64"
+			]
 		}
 	]
 }
