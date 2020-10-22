@@ -1,7 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "zmqInterface.h"
+
+#include "Windows/AllowWindowsPlatformAtomics.h"
 #include "zmq.h"
+#include "Windows/HideWindowsPlatformAtomics.h"
 
 #include <map>
 #include <thread>
