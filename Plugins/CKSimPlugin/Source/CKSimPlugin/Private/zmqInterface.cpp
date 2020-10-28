@@ -122,8 +122,15 @@ void robosim::zmq_interface::step()
 		static char replyer_buffer[16000];
 
 		ControlMessage robosimControl;
-		int received_bytes = zmq_recv(replyer_socket, replyer_buffer, 16000, ZMQ_NOBLOCK);
-		if (received_bytes > 0)
+		int received_bytes = -1;
+		bool data_received = false;
+		do
+		{
+			received_bytes = zmq_recv(replyer_socket, replyer_buffer, 16000, ZMQ_NOBLOCK);
+			data_received = received_bytes > 0 || data_received;
+		} while (received_bytes > 0);
+
+		if (data_received)
 		{
 			{
 				const std::lock_guard<std::mutex> lock(guard_mutex);
