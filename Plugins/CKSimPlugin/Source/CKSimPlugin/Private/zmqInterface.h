@@ -13,6 +13,7 @@ namespace robosim
 		void set_accelerometer(int accelerometer, float value);
 		void set_gyroscope(int gyroscope, float value);
 		void set_advanced(int advanced, float value);
+		void deactivate();
 		void destroy();
 	}
 }

@@ -27,6 +27,7 @@ public class CKSimPlugin : ModuleRules
 			new string[]
 			{
 				"Core",
+				"Engine",
 				"CKlibzmq",
 				"Projects",
 				"CoreUObject",

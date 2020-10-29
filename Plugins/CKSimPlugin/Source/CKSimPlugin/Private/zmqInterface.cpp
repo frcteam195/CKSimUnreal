@@ -27,24 +27,28 @@ static std::mutex guard_mutex;
 
 static void reinitialize_publisher()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Reinitializing Publisher"));
 	zmq_close(publisher_socket);
 	publisher_socket = NULL;
 	publisher_socket = zmq_socket(robosim_zmq_context, ZMQ_PUB);
 	int rc = zmq_bind(publisher_socket, "tcp://*:10502");
 	if (rc <= -1)
 	{
+		UE_LOG(LogTemp, Error, TEXT("Reinitializing Publisher: Failed"));
 		publisher_socket = NULL;
 	}
 }
 
 static void reinitialize_replyer()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Reinitializing Replyer"));
 	zmq_close(replyer_socket);
 	replyer_socket = NULL;
 	replyer_socket = zmq_socket(robosim_zmq_context, ZMQ_REP);
 	int rc = zmq_bind(replyer_socket, "tcp://*:10501");
 	if (rc <= -1)
 	{
+		UE_LOG(LogTemp, Error, TEXT("Reinitializing Replyer: Failed"));
 		replyer_socket = NULL;
 	}
 }
@@ -52,8 +56,6 @@ static void reinitialize_replyer()
 void robosim::zmq_interface::init()
 {
 	robosim_zmq_context = zmq_ctx_new();
-	reinitialize_publisher();
-	reinitialize_replyer();
 }
 
 void robosim::zmq_interface::step()
@@ -180,6 +182,19 @@ void robosim::zmq_interface::set_advanced(int advanced, float value)
 {
 	const std::lock_guard<std::mutex> lock(guard_mutex);
 	advanced_map[advanced] = value;
+}
+
+void robosim::zmq_interface::deactivate()
+{
+	if (publisher_socket != NULL || replyer_socket != NULL)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Deactivating ZMQ on game stop"));
+	}
+	zmq_close(publisher_socket);
+	zmq_close(replyer_socket);
+
+	publisher_socket = NULL;
+	replyer_socket = NULL;
 }
 
 void robosim::zmq_interface::destroy()

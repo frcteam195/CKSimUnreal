@@ -17,9 +17,28 @@ FDelegateHandle TickDelegateHandle;
 
 bool FCKSimPluginModule::Tick(float DeltaTime)
 {
-	robosim::zmq_interface::step();
+	const TIndirectArray<FWorldContext> WorldContexts = GEngine->GetWorldContexts();
+	bool game_active = false;
+	for (const FWorldContext& Context : WorldContexts)
+	{
+		if (Context.WorldType == EWorldType::Game || Context.WorldType == EWorldType::PIE)
+		{
+			game_active = true;
+		}
+	}
+
+	if (game_active)
+	{
+		robosim::zmq_interface::step();
+	}
+	else
+	{
+		robosim::zmq_interface::deactivate();
+	}
+
 	return true;
 }
+
 
 void FCKSimPluginModule::StartupModule()
 {

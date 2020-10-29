@@ -96,9 +96,10 @@ void ASimPluginPawn::Tick(float DeltaSeconds)
 	// Create fire direction vector
 	const float FireForwardValue = temp->Get_Motor(2);
 	const float FireRightValue = temp->Get_Motor(3);
+
 	const FVector FireDirection = FVector(FireForwardValue, FireRightValue, 0.f);
 
-	if (FireForwardValue > 0.5 || FireRightValue > 0.5)
+	if (fabs(FireForwardValue) > 0.5 || fabs(FireRightValue) > 0.5)
 	{
 		// Try and fire a shot
 		FireShot(FireDirection);
